@@ -1,6 +1,6 @@
 
 provider "aws" {
-  region = "us-west-3"
+  region = "eu-west-3"
 }
 
 resource "aws_s3_bucket" "my_bucket" {

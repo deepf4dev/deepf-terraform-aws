@@ -20,12 +20,16 @@ resource "aws_s3_bucket_policy" "hosting_bucket_policy" {
     "Statement" : [
       {
         "Effect" : "Allow",
-        "Principal" : "*",
-        "Action" : "s3:GetObject",
-        "Resource" : "arn:aws:s3:::${var.bucket_name}/*"
+        "Action" : [
+          "s3:PutBucketAcl",
+          "s3:GetBucketAcl",
+          "s3:CreateBucket"
+        ],
+        "Resource" : "arn:aws:s3:::df-frontend-bucket"
       }
     ]
-  })
+    }
+  )
 }
 
 resource "aws_s3_bucket_website_configuration" "hosting_bucket_website_configuration" {

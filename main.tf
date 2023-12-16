@@ -23,6 +23,7 @@ resource "aws_s3_bucket_policy" "hosting_bucket_policy" {
   })
 }
 
+
 resource "aws_s3_bucket_website_configuration" "hosting_bucket_website_configuration" {
   bucket = aws_s3_bucket.hosting_bucket.id
 

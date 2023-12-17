@@ -36,7 +36,7 @@ resource "aws_s3_bucket_policy" "hosting_bucket_policy" {
         Effect    = "Allow",
         Principal = "*",
         Action    = "s3:GetObject",
-        Resource  = "arn:aws:s3:::mon-bucket-react-app/*"
+        Resource  = "arn:aws:s3:::df-frontend-bucket/*"
       }
     ]
   })

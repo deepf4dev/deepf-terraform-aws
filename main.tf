@@ -4,7 +4,13 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "hosting_bucket" {
-  bucket = var.bucket_name
+  bucket = "df-frontend-bucket" # Remplacez par le nom unique de votre bucket
+  acl    = "private"
+
+  website {
+    index_document = "index.html"
+    error_document = "error.html"
+  }
 }
 
 resource "aws_s3_bucket_policy" "hosting_bucket_policy" {
@@ -17,18 +23,8 @@ resource "aws_s3_bucket_policy" "hosting_bucket_policy" {
         Effect    = "Allow",
         Principal = "*",
         Action    = "s3:GetObject",
-        Resource  = "arn:aws:s3:::${aws_s3_bucket.hosting_bucket.id}/*"
+        Resource  = "arn:aws:s3:::mon-bucket-react-app/*"
       }
     ]
   })
 }
-
-
-resource "aws_s3_bucket_website_configuration" "hosting_bucket_website_configuration" {
-  bucket = aws_s3_bucket.hosting_bucket.id
-
-  index_document {
-    suffix = "index.html"
-  }
-}
-

@@ -1,8 +1,4 @@
 
-provider "aws" {
-  region = "eu-west-3"
-}
-
 resource "aws_s3_bucket" "hosting_bucket" {
   bucket = "df-frontend-bucket"
 }
@@ -20,12 +16,6 @@ resource "aws_s3_bucket_website_configuration" "hosting_bucket_website" {
 }
 
 
-resource "aws_s3_bucket_acl" "hosting_bucket_acl" {
-  bucket = aws_s3_bucket.hosting_bucket.id
-  acl    = "private" # Ou "public-read" si le bucket doit être accessible publiquement
-}
-
-
 resource "aws_s3_bucket_policy" "hosting_bucket_policy" {
   bucket = aws_s3_bucket.hosting_bucket.id
 
@@ -36,7 +26,7 @@ resource "aws_s3_bucket_policy" "hosting_bucket_policy" {
         Effect    = "Allow",
         Principal = "*",
         Action    = "s3:GetObject",
-        Resource  = "arn:aws:s3:::df-frontend-bucket/*"
+        Resource  = "arn:aws:s3:::${aws_s3_bucket.hosting_bucket.id}/*"
       }
     ]
   })

@@ -17,7 +17,7 @@ resource "aws_route53_record" "cert_validation" {
       name    = dvo.resource_record_name
       type    = dvo.resource_record_type
       record  = dvo.resource_record_value
-      zone_id = "votre-zone-id" # Remplacez par l'ID de votre zone hébergée Route 53
+      zone_id = "Z05679481UCJK9WJF50QO"
     }
   }
 

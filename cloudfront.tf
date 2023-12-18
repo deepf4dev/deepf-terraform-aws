@@ -1,7 +1,7 @@
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
-    domain_name = "deepf.io"
-    origin_id   = "S3-df-cloudfront"
+    domain_name = aws_s3_bucket.bucket.bucket_regional_domain_name
+    origin_id   = "S3-${aws_s3_bucket.bucket.id}"
   }
 
   enabled             = true
@@ -12,7 +12,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "S3-df-cloudfront"
+    target_origin_id = "S3-${aws_s3_bucket.bucket.id}"
 
     forwarded_values {
       query_string = false
@@ -35,7 +35,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   viewer_certificate {
     cloudfront_default_certificate = false
-    acm_certificate_arn            = "arn:aws:acm:us-east-1:123456789012:certificate/your-cert-id" # Remplacez par votre ARN de certificat
+    acm_certificate_arn            = "arn:aws:acm:eu-west-3:967651037590:certificate/b3ad496f-fac2-4017-a143-2293bd4bb97d" # Remplacez par votre ARN de certificat
     ssl_support_method             = "sni-only"
     minimum_protocol_version       = "TLSv1.2_2018"
   }
